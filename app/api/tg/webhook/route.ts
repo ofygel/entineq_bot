@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { sbAdmin } from '../../../../lib/supabase-admin';
+import { getAdminClient } from '../../../../lib/supabase-admin';
 import { tgAnswerCb, tgEditText, formatOrder, kbTaken, tgSend, kbDM, kbRequestPhone } from '../../../../lib/telegram';
 
 export const runtime = 'nodejs';
@@ -14,6 +14,7 @@ export async function POST(req: NextRequest) {
   const update = await req.json().catch(() => ({}));
 
   try {
+    const sbAdmin = getAdminClient();
     // 1) /bind_drivers_channel — отправляется ИЗ самого канала
     if (update.message?.text?.startsWith?.('/bind_drivers_channel')) {
       const chat = update.message.chat;
