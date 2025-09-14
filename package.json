@@ -1,0 +1,11 @@
+{
+  "name": "entineq_bot",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "echo 'No tests'"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.5"
+  }
+}
