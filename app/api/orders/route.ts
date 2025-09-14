@@ -1,11 +1,12 @@
 import { NextResponse, NextRequest } from 'next/server';
-import { sbAdmin } from '../../../lib/supabase-admin';
+import { getAdminClient } from '../../../lib/supabase-admin';
 import { tgSend, formatOrder, kbForNew } from '../../../lib/telegram';
 
 export const runtime = 'nodejs';
 
 export async function POST(req: NextRequest) {
   try {
+    const sbAdmin = getAdminClient();
     const body = await req.json().catch(() => ({}));
 
     // Ожидаем минимальный набор
