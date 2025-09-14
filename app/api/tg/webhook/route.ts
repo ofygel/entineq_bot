@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { sbAdmin } from '@/lib/supabase-admin';
-import { tgAnswerCb, tgEditText, formatOrder, kbTaken, tgSend, kbDM, kbRequestPhone } from '@/lib/telegram';
+import { sbAdmin } from '../../../../lib/supabase-admin';
+import { tgAnswerCb, tgEditText, formatOrder, kbTaken, tgSend, kbDM, kbRequestPhone } from '../../../../lib/telegram';
 
 export const runtime = 'nodejs';
 
