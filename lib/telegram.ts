@@ -3,7 +3,13 @@ import 'server-only';
 const BOT_TOKEN = process.env.TG_BOT_TOKEN!;
 const API = `https://api.telegram.org/bot${BOT_TOKEN}`;
 
-type RM = { inline_keyboard?: Array<Array<{ text: string; callback_data?: string; url?: string }>> };
+type RM = {
+  inline_keyboard?: Array<Array<{ text: string; callback_data?: string; url?: string }>>;
+  keyboard?: Array<Array<{ text: string; request_contact?: boolean }>>;
+  remove_keyboard?: boolean;
+  one_time_keyboard?: boolean;
+  resize_keyboard?: boolean;
+};
 
 async function tg(method: string, payload: any) {
   const r = await fetch(`${API}/${method}`, {
@@ -58,6 +64,14 @@ export function kbTaken(username?: string): RM {
 
 export function kbDM(orderId: number | string): RM {
   return { inline_keyboard: [[{ text: '❌ Отказаться', callback_data: `release:${orderId}` }]] };
+}
+
+export function kbRequestPhone(): RM {
+  return {
+    keyboard: [[{ text: '📱 Отправить номер', request_contact: true }]],
+    one_time_keyboard: true,
+    resize_keyboard: true,
+  };
 }
 
 function escape(s: string) {
